@@ -1,2 +1,2 @@
-# FreeModbus_KL25Z
-Port FreeModbus FRDM_KL25Z
+# FreeModbus KL25Z
+Port FreeModbus FRDM-KL25Z
