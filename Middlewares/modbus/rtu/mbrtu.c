@@ -1,6 +1,6 @@
 /* 
  * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
- * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
+ * Copyright (c) 2006 Christian Walter <wolti@sil.at>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,22 +25,21 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
+ * File: $Id: mbrtu.c,v 1.18 2007/09/12 10:15:56 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
+#include "mbrtu.h"
+
 #include "stdlib.h"
 #include "string.h"
 
 /* ----------------------- Platform includes --------------------------------*/
-#include "../port/port.h"
-
-/* ----------------------- Modbus includes ----------------------------------*/
 #include "../include/mb.h"
-#include "mbrtu.h"
-#include "../include/mbframe.h"
-
-#include "mbcrc.h"
 #include "../include/mbport.h"
+#include "../include/mbframe.h"
+#include "../port/port.h"
+#include "mbcrc.h"
 
 /* ----------------------- Defines ------------------------------------------*/
 #define MB_SER_PDU_SIZE_MIN     4       /*!< Minimum size of a Modbus RTU frame. */
@@ -151,6 +150,10 @@ eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
 {
     BOOL            xFrameReceived = FALSE;
     eMBErrorCode    eStatus = MB_ENOERR;
+	
+	
+	 (void)(xFrameReceived);
+	
 
     ENTER_CRITICAL_SECTION(  );
     assert( usRcvBufferPos < MB_SER_PDU_SIZE_MAX );
@@ -158,6 +161,8 @@ eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
     /* Length and CRC check */
     if( ( usRcvBufferPos >= MB_SER_PDU_SIZE_MIN )
         && ( usMBCRC16( ( UCHAR * ) ucRTUBuf, usRcvBufferPos ) == 0 ) )
+    //if( usMBCRC16( ( UCHAR * ) ucRTUBuf, usRcvBufferPos ) == 0 )
+    //if(1)
     {
         /* Save the address field. All frames are passed to the upper layed
          * and the decision if a frame is used is done there.

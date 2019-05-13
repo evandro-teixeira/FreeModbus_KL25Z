@@ -33,6 +33,10 @@
 #define USEC_TO_COUNT(us, clockFreqInHz) 	(uint32_t)((uint64_t)us * clockFreqInHz / 1000000U)
 #define CHANNEL_PIT_MODBUS					PIT_CH_0
 
+/* ----------------------- static variable ---------------------------------*/
+//static uint16_t timeout = 0;
+//static uint16_t downcounter = 0;
+
 /* ----------------------- static functions ---------------------------------*/
 static void prvvTIMERExpiredISR( uint8_t ch );
 
@@ -41,8 +45,8 @@ BOOL
 xMBPortTimersInit( USHORT usTim1Timerout50us )
 {
 	uint32_t time = 0;
-
-	time = (uint32_t)( USEC_TO_COUNT(/*usTim1Timerout50us*/50,SystemCoreClock) );
+	//timeout = usTim1Timerout50us;
+	time = (uint32_t)( USEC_TO_COUNT( (usTim1Timerout50us * 49/*T: 50us */),SystemCoreClock) );
 	pit_Init( time, CHANNEL_PIT_MODBUS );
 	pit_Add_Callback(prvvTIMERExpiredISR);
     return TRUE;
@@ -53,6 +57,7 @@ inline void
 vMBPortTimersEnable(  )
 {
     /* Enable the timer with the timeout passed to xMBPortTimersInit( ) */
+	//downcounter = timeout;
 	pit_Start( CHANNEL_PIT_MODBUS );
 }
 
@@ -71,7 +76,10 @@ static void prvvTIMERExpiredISR( uint8_t ch )
 {
 	if(ch == CHANNEL_PIT_MODBUS)
 	{
-		( void )pxMBPortCBTimerExpired(  );
+		//if (!--downcounter)
+		//{
+			( void )pxMBPortCBTimerExpired(  );
+		//}
 	}
 }
 

@@ -103,6 +103,7 @@ xMBPortSerialGetByte( CHAR * pucByte )
      */
 	while(!(MDSERIAL->S1 & UART0_S1_TDRE_MASK));
 	*pucByte = MDSERIAL->D;
+	MDSERIAL->C2 |= UART_C2_RIE_MASK;
     return TRUE;
 }
 
@@ -136,10 +137,12 @@ void prvvMBPortSerialISR( void )
 {
     if( bTXEnabled && ( MDSERIAL->S1 & UART_S1_TC_MASK ) )
     {
+    	gpio_Toggle(GPIOB,19);
         ( void )pxMBFrameCBTransmitterEmpty(  );
     }
     if( bRXEnabled && ( MDSERIAL->S1 & UART_S1_RDRF_MASK ) )
     {
+    	gpio_Toggle(GPIOB,18);
         ( void )pxMBFrameCBByteReceived(  );
     }
 }

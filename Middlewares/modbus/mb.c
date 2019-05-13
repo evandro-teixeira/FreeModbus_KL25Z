@@ -1,6 +1,6 @@
 /* 
  * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
- * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
+ * Copyright (c) 2006 Christian Walter <wolti@sil.at>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,28 +25,26 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
+ * File: $Id: mb.c,v 1.28 2010/06/06 13:54:40 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
+#include "include/mb.h"
+
 #include "stdlib.h"
 #include "string.h"
 
-/* ----------------------- Platform includes --------------------------------*/
-#include "port/port.h"
-
-/* ----------------------- Modbus includes ----------------------------------*/
-#include "include/mb.h"
 #include "include/mbconfig.h"
 #include "include/mbframe.h"
-#include "include/mbproto.h"
 #include "include/mbfunc.h"
-
 #include "include/mbport.h"
+#include "include/mbproto.h"
+#include "port/port.h"
 #if MB_RTU_ENABLED == 1
 #include "rtu/mbrtu.h"
 #endif
 #if MB_ASCII_ENABLED == 1
-#include "ascii/mbascii.h"
+#include "mbascii.h"
 #endif
 #if MB_TCP_ENABLED == 1
 #include "mbtcp.h"
