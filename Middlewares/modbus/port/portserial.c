@@ -26,7 +26,7 @@
 #include "../include/mbport.h"
 
 /* ----------------------- Drivers includes ---------------------------------*/
-#include "../Drivers/externs.h"
+#include "../Library-FRDM-KL25Z/externs.h"
 
 /* -------------------------- Macros --------------------------------------- */
 #define MDSERIAL 	UART1

@@ -27,7 +27,7 @@
 #include "../include/mbport.h"
 
 /* ----------------------- Drivers includes ----------------------------------*/
-#include "../Drivers/externs.h"
+#include "../Library-FRDM-KL25Z/externs.h"
 
 /*-------- Macro to convert a microsecond period to raw count value ---------*/
 #define USEC_TO_COUNT(us, clockFreqInHz) 	(uint32_t)((uint64_t)us * clockFreqInHz / 1000000U)

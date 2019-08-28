@@ -1,0 +1,9 @@
+#.settings/
+output/
+build/
+Debug/
+.vscode/
+.vscode
+#.cproject
+#.project
+#.cwGeneratedFileSetLog

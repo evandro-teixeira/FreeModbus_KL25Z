@@ -29,7 +29,7 @@
  */
 
 #include "MKL25Z4.h"
-#include "../Drivers/externs.h"
+#include "../Library-FRDM-KL25Z/externs.h"
 #include "../Middlewares/modbus/include/mb.h"
 #include "../Middlewares/modbus/include/mbport.h"
 #include "../Middlewares/modbus/include/mbutils.h"
